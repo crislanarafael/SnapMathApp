@@ -1,4 +1,4 @@
-# Snap Math App or Snap Math Application
+# Snap Math App 
 
 Repository for my Snap Math App application for Code In Place 2021's final project submission. As a math peer tutor and engineering student I made this app to help people improve their basic math/arithmetic skills. Code In Place 2021 inspired me to also create Snap Math App's mascot Sam the Sea Otter. I included Sam to help make math learning friendly and accessible like how all the Code In Place staff made programming accessible! 
 
