@@ -3,6 +3,8 @@
 # A tool to help students practice and master basic math skills with the help of Snap Math App's mascot, Sam the Sea Otter
 
 from tkinter import *
+from tkinter import messagebox
+
 from PIL import ImageTk,Image
 import random
  #mainwin = Tk ()
@@ -46,6 +48,10 @@ global number1
 global number2
 operations_list = ["+", "-", "*", "/"]
 user_input = 0
+global answer
+answer = 0
+global answer_is_correct
+answer_is_correct = True
 
 def main_window(main):
     main.iconbitmap(r'C:\Users\crisl\OneDrive\Desktop\Code In Place Stanford\favicon_io\favicon.ico') #set favicon
@@ -79,6 +85,9 @@ def clear_frame():
 def enter_and_evaluate(value, type_of_arithmetic):
     #this function stores the user's answer and updates user's total score
     global total_score
+    global answer_is_correct
+    global answer
+
     if type_of_arithmetic == '+':
         answer = number1 + number2
     if type_of_arithmetic == '-':
@@ -90,6 +99,9 @@ def enter_and_evaluate(value, type_of_arithmetic):
     user_input = int(value) #value from the text field is a string and we convert it to an int
     if user_input == answer:
         total_score += 1
+        messagebox.showinfo('SnapMathApp Feedback', 'You got the correct answer!')
+    else:
+        messagebox.showinfo('SnapMathApp Feedback', 'So close, the answer is ' + str(answer))
     print(answer)
     print(total_score)
     #print(operations_list[random.randint(0,3)])
@@ -135,9 +147,12 @@ def next_question():
 
 def run_program():
     #initialize
+    answer_text = ""
+    current_answer = False
     global question_loop
     question_loop += 1
     global current_question
+    global answer_is_correct
     current_question.set(current_question.get()+1)
     #frame within a frame - inception style
     question_frame = Frame(f, width=400, height=400, borderwidth=10, bg="#ffde59")
@@ -146,7 +161,7 @@ def run_program():
     question_frame.pack()
 
     #randomize operations
-    type_of_arithmetic = operations_list[random.randint(0, 3)]
+    type_of_arithmetic = operations_list[random.randint(0, 3)] #selects a random index from operations_list
     global number1
     global number2
     number1 = random.randint(1,1000)
@@ -182,6 +197,7 @@ def run_program():
     enter_Button = Button(question_frame, text="Enter Answer", command=lambda: enter_and_evaluate(input_text.get("1.0", END), type_of_arithmetic), font="Helvetica")
     enter_Button.pack()
 
+    #added message box to alert user if they got the question correct or not
     blankspace5 = Label(f, text="", font="Helvetica 15 bold", bg="#ffde59", anchor='w', justify=LEFT)
     blankspace5.pack(fill='both')
 
@@ -202,7 +218,7 @@ def num_questions_selected(value):
     #print(number_questions)
 
 def math_setup():
-
+    #screen allowing the user to select the number of questions
     setup_heading = Label(f, text="Snap Math Setup", font="Arial 20 bold", bg="#ffde59")
     setup_heading.pack()
 
@@ -285,6 +301,8 @@ def main_content():
 main_window(root)
 main_content()
 mainloop()
+
+
 
 
 
